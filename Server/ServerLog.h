@@ -7,16 +7,17 @@
 #include <string>
 #include <cstdarg>
 #include <fstream>
-#include <memory>
+
 class ServerLog {
 public:
     ServerLog(std::string logFileName);
+    ~ServerLog();
     bool addLogWithTime(std::string, ...);
     bool addLogWithoutTime(std::string, ...);
 
 private:
-    bool addLog(std::string, ...);
-    std::shared_ptr<FILE > fd;
+    bool addLog(char *, std::string, va_list);
+    FILE* fd;
 };
 
 #endif
